@@ -35,7 +35,7 @@ class Admin extends CI_Controller {
 
 		$queryString = array("method"=>"add_folder", "dir"=>$folderPath, "secret"=>$folderSecret, "selective_sync"=>1);
 
-		$this->curl->simple_get('http://' . $this->config->item('btSyncUser') . ":" . $this->config->item('btSyncPassword') . '@dropbox.knowfear.net:8888/api?'. http_build_query($queryString));
+		$this->curl->simple_get('http://' . $this->config->item('btSyncUser') . ":" . $this->config->item('btSyncPassword') . '@' . $this->config->item('btAddress') . '/api?'. http_build_query($queryString));
 
 		redirect("/admin");
 
@@ -74,7 +74,7 @@ class Admin extends CI_Controller {
 
 
 		$queryString = array("method"=>"set_file_prefs", "secret"=>$collection->getSecret(), "path"=>$path . "/" . $filename, "download"=>1);
-		$result = json_decode($this->curl->simple_get('http://' . $this->config->item('btSyncUser') . ":" . $this->config->item('btSyncPassword') . '@dropbox.knowfear.net:8888/api?'. http_build_query($queryString)));
+		$result = json_decode($this->curl->simple_get('http://' . $this->config->item('btSyncUser') . ":" . $this->config->item('btSyncPassword') . '@' . $this->config->item('btAddress') . '/api?'. http_build_query($queryString)));
 
 		if($result[0]->download == 1) {
 			$status="success";	
@@ -114,7 +114,7 @@ class Admin extends CI_Controller {
 		$queryString = array("method"=>"get_files", "secret"=>$collection->getSecret(), "path"=>$path_in_url);
 		
 
-		$result = $this->curl->simple_get('http://' . $this->config->item('btSyncUser') . ":" . $this->config->item('btSyncPassword') . '@dropbox.knowfear.net:8888/api?'. http_build_query($queryString));
+		$result = $this->curl->simple_get('http://' . $this->config->item('btSyncUser') . ":" . $this->config->item('btSyncPassword') . '@' . $this->config->item('btAddress') . '/api?'. http_build_query($queryString));
 
 		$resultArray = json_decode($result);
 		if(!is_array($resultArray)) {
