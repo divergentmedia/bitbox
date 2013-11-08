@@ -55,7 +55,7 @@
 			</table>
 
 			<!-- jQuery -->
-			<script src="/jquery.tablesorter.min.js"></script>
+			<script src="/assets/jquery.tablesorter.min.js"></script>
 
 			<script>
 			$(document).ready(function() 

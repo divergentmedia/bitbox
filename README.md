@@ -17,11 +17,13 @@ Next, create a local MySQL user and database for this application, and populate 
 
 Download the current release of [CodeIgniter](http://codeigniter.com) and place the system folder and index.php in the BitBox root.
 
+Edit index.php and add the line `include_once './vendor/autoload.php';` to the top of the file.
+
 In the BitBox root, run 
 `curl -sS https://getcomposer.org/installer | php`
 to install Composer.  Then run `php composer.phar install` to get the php dependencies.
 
-Run `curl -sS https://getcomposer.org/installer | php` to install CodeIgniter Sparks, then run `php tools/spark install -v1.3.0 curl` to get the Sparks dependencies.
+Run `php -r "$(curl -fsSL http://getsparks.org/go-sparks)"` to install CodeIgniter Sparks, then run `php tools/spark install -v1.3.0 curl` to get the Sparks dependencies.
 
 You've now got all the necessary components.  You may need to edit the .htaccess file to match your server (see the normal CodeIgniter instructions for details).
 
