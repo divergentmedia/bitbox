@@ -13,3 +13,22 @@ In order to use BitBox, you'll need a [BitTorrent Sync API key](http://www.bitto
 
 Begin by configuring BTSync on your computer.  You'll need to enable the API with your API key, and confirm that the BTSync client is accessible via the web (port 8888).
 
+Next, create a local MySQL user and database for this application, and populate the information in application/config/database.php.  You should also fill in the top section of application/config/config.php (up through the address for your host).
+
+Download the current release of [CodeIgniter](http://codeigniter.com) and place the system folder and index.php in the BitBox root.
+
+In the BitBox root, run 
+`curl -sS https://getcomposer.org/installer | php`
+to install Composer.  Then run `php composer.phar install` to get the php dependencies.
+
+Run `curl -sS https://getcomposer.org/installer | php` to install CodeIgniter Sparks, then run `php tools/spark install -v1.3.0 curl` to get the Sparks dependencies.
+
+You've now got all the necessary components.  You may need to edit the .htaccess file to match your server (see the normal CodeIgniter instructions for details).
+
+Next run `php doctrineHelper.php orm:schema-tool:create` to create the necessary MySQL tables.
+
+You should now be able to access BitBox via the web, at "youraddress/admin" - the username and password are defined in the config.php file.
+
+At this point, try adding a BitTorrent Sync folder - paste in the shared secret, and set the absolute path that you'd like to store the files on your server.  Be sure you've got permission to write to that folder.  You should be able to browse the files in that folder, and mark them for sharing.
+
+When a file is shared, BitBox asks BitTorrent Sync to begin syncing.  It can take a few seconds for the download to start.  You can access the sharing URL while the file is still syncing - the download will automatically start when the sync is complete.
