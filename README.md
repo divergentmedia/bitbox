@@ -31,6 +31,8 @@ Next run `php doctrineHelper.php orm:schema-tool:create` to create the necessary
 
 You should now be able to access BitBox via the web, at "youraddress/admin" - the username and password are defined in the config.php file.
 
+Make sure the "application/models/Proxies" folder is writeable by your web server.  
+
 At this point, try adding a BitTorrent Sync folder - paste in the shared secret, and set the absolute path that you'd like to store the files on your server.  Be sure you've got permission to write to that folder.  You should be able to browse the files in that folder, and mark them for sharing.
 
 When a file is shared, BitBox asks BitTorrent Sync to begin syncing.  It can take a few seconds for the download to start.  You can access the sharing URL while the file is still syncing - the download will automatically start when the sync is complete.
