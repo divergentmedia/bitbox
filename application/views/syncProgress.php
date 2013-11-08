@@ -12,7 +12,7 @@
 				<h1>File Sync Underway</h1>
 				<p>We don't have that file ready for you quite yet</p>
 				<p>
-					Refresh this page in a little bit ...
+					This page will refresh automatically
 				</p>
 			</div>
 		</div>
