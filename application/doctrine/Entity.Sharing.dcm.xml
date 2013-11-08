@@ -1,0 +1,26 @@
+<!-- Entity.Collection.dcm.xml -->
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                    http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+      <entity name="Entity\Sharing" table="sharing">
+          <id name="id" type="integer">
+              <generator strategy="AUTO" />
+          </id>
+
+          <field name="hash" type="string"  nullable='true' />
+
+          <field name="path" type="string"  nullable='false' />
+          <field name="filename" type="string"  nullable='false' />
+      
+          <many-to-one field="collection" target-entity="Collection">
+            <join-column name="collection_id" referenced-column-name="id" />
+          </many-to-one>    
+          <indexes>
+            <index name="hash_idx" columns="hash"/>
+          </indexes>
+      </entity>
+
+
+</doctrine-mapping>
