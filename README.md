@@ -11,7 +11,9 @@ BitBox is a CodeIgniter web application.
 
 In order to use BitBox, you'll need a [BitTorrent Sync API key](http://www.bittorrent.com/sync/developers).  
 
-Begin by configuring BTSync on your computer.  You'll need to enable the API with your API key, and confirm that the BTSync client is accessible via the web (port 8888).
+BitBox requires either the pecl_http library for php or mod-xsendfile for Apache. Both can easily be installed via tools like apt-get.  By default, BitBox uses mod-xsendfile - see application/controllers/download.php to switch to pecl_http.  IF you're using mod-xsendfile, be sure your BitBox virtual host has mod-xsendfile enabled.
+
+Start by configuring BTSync on your computer.  You'll need to enable the API with your API key, and confirm that the BTSync client is accessible via the web (port 8888).
 
 Next, create a local MySQL user and database for this application, and populate the information in application/config/database.php.  You should also fill in the top section of application/config/config.php (up through the address for your host).
 

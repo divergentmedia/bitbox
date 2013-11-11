@@ -45,6 +45,14 @@ class Download extends CI_Controller {
 		if(file_exists(($targetPath))) {
 
 			if($startDownload) {
+				
+				/**
+				 * If you'd rather use pecl_http, uncomment the http_send lines and comment out the header lines
+				 */
+				//http_send_content_disposition($targetFile->getFilename(), true);
+				//http_send_content_type("application/octet-stream");
+				//http_send_file($targetPath);
+				
 				header("X-Sendfile: $targetPath");
 	    		header("Content-Type: application/octet-stream");
 	    		header("Content-Disposition: attachment; filename=\"".$targetFile->getFilename()."\"");

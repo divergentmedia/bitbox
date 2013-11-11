@@ -87,6 +87,15 @@
 </body>
 </html>
 
+<style>
+body .modal-dialog {
+    /* new custom width */
+    width: 800px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    //margin-left: -280px;
+}
+</style>
+
 <div class="modal fade" id="sharingDialog" role="dialog" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
