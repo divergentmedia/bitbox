@@ -24,6 +24,18 @@ class Collection
      */
     private $id;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $sharedFiles;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->sharedFiles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Set path
@@ -79,5 +91,38 @@ class Collection
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Add sharedFiles
+     *
+     * @param \Entity\Sharing $sharedFiles
+     * @return Collection
+     */
+    public function addSharedFile(\Entity\Sharing $sharedFiles)
+    {
+        $this->sharedFiles[] = $sharedFiles;
+
+        return $this;
+    }
+
+    /**
+     * Remove sharedFiles
+     *
+     * @param \Entity\Sharing $sharedFiles
+     */
+    public function removeSharedFile(\Entity\Sharing $sharedFiles)
+    {
+        $this->sharedFiles->removeElement($sharedFiles);
+    }
+
+    /**
+     * Get sharedFiles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSharedFiles()
+    {
+        return $this->sharedFiles;
     }
 }

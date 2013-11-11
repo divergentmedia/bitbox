@@ -17,6 +17,10 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 	
+		if($errorData = $this->session->flashdata('error')) {
+			$data['errors'] = $errorData;
+		}
+
 		$data['collections'] = $this->doctrine->em->getRepository("Entity\Collection")->findAll();
 		$this->load->view("adminHome", $data);
 
@@ -28,6 +32,14 @@ class Admin extends CI_Controller {
 		$folderSecret = $this->input->post("secret");
 		$folderPath = $this->input->post("folderPath");
 		$collection = new Entity\Collection();
+		
+		if(!file_exists($folderPath)) {
+			if(!mkdir($folderPath)) {
+				$this->session->set_flashdata('error', 'Could Not Create Destination Folder');
+				redirect("/admin");
+			}
+		}
+
 		$collection->setPath($folderPath);
 		$collection->setSecret($folderSecret);
 		$this->doctrine->em->persist($collection);
@@ -35,8 +47,32 @@ class Admin extends CI_Controller {
 
 		$queryString = array("method"=>"add_folder", "dir"=>$folderPath, "secret"=>$folderSecret, "selective_sync"=>1);
 
-		$this->curl->simple_get('http://' . $this->config->item('btSyncUser') . ":" . $this->config->item('btSyncPassword') . '@' . $this->config->item('btAddress') . '/api?'. http_build_query($queryString));
+		$response = $this->curl->simple_get('http://' . $this->config->item('btSyncUser') . ":" . $this->config->item('btSyncPassword') . '@' . $this->config->item('btAddress') . '/api?'. http_build_query($queryString));
+		$decodedResponse = json_decode($response);
 
+		if($decodedResponse->result != 0) {
+			$this->session->set_flashdata('error', $decodedResponse->message);
+		}
+
+		redirect("/admin");
+
+	}
+
+	public function removeFolder($folderId) {
+
+		$collection = $this->doctrine->em->find("Entity\Collection", $folderId);
+		
+		$queryString = array("method"=>"remove_folder", "secret"=>$collection->getSecret());
+		$response = $this->curl->simple_get('http://' . $this->config->item('btSyncUser') . ":" . $this->config->item('btSyncPassword') . '@' . $this->config->item('btAddress') . '/api?'. http_build_query($queryString));
+		$decodedResponse = json_decode($response);
+		if($decodedResponse->result != 0) {
+			$this->session->set_flashdata('error', $decodedResponse->message);
+		}
+		else {
+			$this->doctrine->em->remove($collection);
+			$this->doctrine->em->flush();
+		}
+		
 		redirect("/admin");
 
 	}

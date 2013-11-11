@@ -30,7 +30,8 @@ class Download extends CI_Controller {
 
 	}
 
-	public function getFile($target)
+
+	public function getFile($target=null, $startDownload=null)
 	{
 		if(!$target) {
 			show_404();
@@ -43,10 +44,15 @@ class Download extends CI_Controller {
 
 		if(file_exists(($targetPath))) {
 
-			header("X-Sendfile: $targetPath");
-	    	header("Content-Type: application/octet-stream");
-	    	header("Content-Disposition: attachment; filename=\"".$targetFile->getFilename()."\"");
-	    	return;
+			if($startDownload) {
+				header("X-Sendfile: $targetPath");
+	    		header("Content-Type: application/octet-stream");
+	    		header("Content-Disposition: attachment; filename=\"".$targetFile->getFilename()."\"");
+	    		return;
+	    	}
+	    	else {
+	    		$this->load->view("fileDownloading", array("filename"=>$targetFile->getFilename(), "targetId"=>$target));
+	    	}
 
 		}
 		else {

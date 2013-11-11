@@ -12,6 +12,13 @@
 		<!-- Bootstrap JavaScript -->
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 
+		<?if(isset($errors)):?>
+			<div class="alert alert-danger">
+			    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			    <strong>Error Adding Folder:</strong> <?=$errors?>
+			</div>
+		<?endif?>
+
 		<h1>Existing Collections:</h1>
 		<div class="row">
 			<div class="col-md-6">
@@ -21,7 +28,7 @@
 							<ul class="list-group">
 								<li class="list-group-item"><strong>Path: </strong><?=$collection->getPath()?></li>
 								<li class="list-group-item"><strong>Secret: </strong><?=$collection->getSecret()?></li>
-								<li class="list-group-item"><a href="<?=site_url("/admin/browse/". $collection->getId())?>" class="btn btn-primary">Browse</a></li>
+								<li class="list-group-item"><a href="<?=site_url("/admin/browse/". $collection->getId())?>" class="btn btn-primary">Browse</a> <a href="<?=site_url("/admin/removeFolder/". $collection->getId())?>" class="btn btn-primary">Remove</a></li>
 							</ul>
 
 						</div>

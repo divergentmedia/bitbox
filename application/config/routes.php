@@ -41,6 +41,7 @@
 $route['default_controller'] = "home";
 //$route['admin/(.*)'] = "home/admin/$1";
 $route['download/checkAvailability/(.*)'] = "download/checkAvailability/$1";
+$route['download/getFile/(.*)'] = "download/getFile/$1";
 $route['download/(.*)'] = "download/getFile/$1";
 $route['404_override'] = '';
 

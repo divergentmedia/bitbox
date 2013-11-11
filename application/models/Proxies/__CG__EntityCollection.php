@@ -64,10 +64,10 @@ class Collection extends \Entity\Collection implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'path', 'secret', 'id');
+            return array('__isInitialized__', 'path', 'secret', 'id', 'sharedFiles');
         }
 
-        return array('__isInitialized__', 'path', 'secret', 'id');
+        return array('__isInitialized__', 'path', 'secret', 'id', 'sharedFiles');
     }
 
     /**
@@ -230,6 +230,39 @@ class Collection extends \Entity\Collection implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', array());
 
         return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addSharedFile(\Entity\Sharing $sharedFiles)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addSharedFile', array($sharedFiles));
+
+        return parent::addSharedFile($sharedFiles);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeSharedFile(\Entity\Sharing $sharedFiles)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeSharedFile', array($sharedFiles));
+
+        return parent::removeSharedFile($sharedFiles);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSharedFiles()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSharedFiles', array());
+
+        return parent::getSharedFiles();
     }
 
 }

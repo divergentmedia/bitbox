@@ -28,7 +28,6 @@
 windowTimer = setInterval(function() {
 			$.get("/download/checkAvailability/<?=$targetId?>", function(data) {
 				if(data == "ready") {
-					$("#headerContainer").html("<h1>Download Starting...");
 					window.location.reload();
 					clearTimeout(windowTimer);
 				}

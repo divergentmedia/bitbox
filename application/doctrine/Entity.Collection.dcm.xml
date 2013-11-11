@@ -11,7 +11,11 @@
 
           <field name="path" type="string"  nullable='false' />
           <field name="secret" type="string"  nullable='false' />
+          <one-to-many target-entity="Entity\Sharing" field="sharedFiles" mapped-by="collection">
+              <cascade><cascade-remove /></cascade>
+          </one-to-many>
       </entity>
 
 
 </doctrine-mapping>
+

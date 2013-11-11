@@ -14,7 +14,7 @@
           <field name="path" type="string"  nullable='false' />
           <field name="filename" type="string"  nullable='false' />
       
-          <many-to-one field="collection" target-entity="Collection">
+          <many-to-one field="collection" target-entity="Collection" inversed-by="sharedFiles">
             <join-column name="collection_id" referenced-column-name="id" />
           </many-to-one>    
           <indexes>
